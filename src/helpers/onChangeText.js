@@ -1,3 +1,3 @@
-export default function maTextChange (e, someEditor) {
+export default function myTextChange (e, someEditor) {
 	someEditor(e.target.value)
 }
