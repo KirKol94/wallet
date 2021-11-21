@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Accounting from "./pages/Accounting";
+import useLocalStorage from "./helpers/useLocalStorage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export const App = () => {
+
+	const [incomeCount, setIncomeCount] = useLocalStorage('incomeCount', 0)
+	const [incomeCategories, setIncomeCategories] = useLocalStorage('incomeCategories', [])
+
+	const [expenseCount, setExpenseCount] = useLocalStorage('expenseCount', 0)
+	const [expenseCategories, setExpenseCategories] = useLocalStorage('expenseCategories', [])
+
+	return (
+
+		<div className="container-fluid bg-dark bg-gradient text-white min-vh-100 vw-100">
+			<div className="container min-vh-100">
+
+				<Accounting pageName="Доход"
+										categories={incomeCategories}
+										setCategories={setIncomeCategories}
+										commonCount={incomeCount}
+										setCommonCount={setIncomeCount}/>
+
+				<Accounting pageName="Расход"
+										categories={expenseCategories}
+										setCategories={setExpenseCategories}
+										commonCount={expenseCount}
+										setCommonCount={setExpenseCount}/>
+
+
+			</div>
+		</div>
+	)
 }
-
-export default App;
